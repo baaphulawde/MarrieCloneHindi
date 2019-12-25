@@ -25,26 +25,20 @@ For more commands click /help...
 """
 
 HELP_STRINGS = """
-
-Hello! my name *{}*.
-
+Hi! my name is *{}*.
 *Main* available commands:
- - /start: bot start karne ke liye...
+ - /start: Start the bot...
  - /help: help....
- - /donate: Owner ko donate karne ke liye!
  - /settings:
    - in PM: To find out what SETTINGS you have set....
    - in a group:
-
 {}
 And the following:
 """.format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll of the following commands  / or ! can  be used...\n")
 
-DONATE_STRING = """Acha laga ap donate karna chahte h!
-It took lots of work for [my creator](t.me/king_un_007) to get me to where I am now, and every donation helps \
-motivate him to make me even better \
-. He's just a poor student, so every little helps!
-Instead of paying him you can follow him on instagram https://www.instagram.com/mohit.719 """
+DONATE_STRING = """Hey, glad to hear you want to donate!
+It took lots of work for [my creator](t.me/King_UN_007). He's just a poor student, so every little helps! You can donate him 
+."""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -65,7 +59,7 @@ for module_name in ALL_MODULES:
     if not imported_module.__mod_name__.lower() in IMPORTED:
         IMPORTED[imported_module.__mod_name__.lower()] = imported_module
     else:
-        raise Exception("2 mondules same name ke nhi ho sakte! Please change one")
+        raise Exception("Can't have two modules with the same name! Please change one")
 
     if hasattr(imported_module, "__help__") and imported_module.__help__:
         HELPABLE[imported_module.__mod_name__.lower()] = imported_module
@@ -107,7 +101,7 @@ def send_help(chat_id, text, keyboard=None):
 def test(bot: Bot, update: Update):
     # pprint(eval(str(update)))
     # update.effective_message.reply_text("Hola tester! _I_ *have* `markdown`", parse_mode=ParseMode.MARKDOWN)
-    update.effective_message.reply_text("msg pin kiya gya")
+    update.effective_message.reply_text("This person edited a message")
     print(update.effective_message)
 
 
@@ -136,7 +130,7 @@ def start(bot: Bot, update: Update, args: List[str]):
                 PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
                 parse_mode=ParseMode.MARKDOWN)
     else:
-        update.effective_message.reply_text("Jaag gye😏😏😏")
+        update.effective_message.reply_text("waked up😏😏😏")
 
 
 # for test purposes
@@ -226,7 +220,7 @@ def get_help(bot: Bot, update: Update):
     # ONLY send help in PM
     if chat.type != chat.PRIVATE:
 
-        update.effective_message.reply_text("Commands ke liye pm me msg kare.",
+        update.effective_message.reply_text("Contact me in PM to get the list of configured commands.",
                                             reply_markup=InlineKeyboardMarkup(
                                                 [[InlineKeyboardButton(text="Help",
                                                                        url="t.me/{}?start=help".format(
@@ -248,11 +242,11 @@ def send_settings(chat_id, user_id, user=False):
         if USER_SETTINGS:
             settings = "\n\n".join(
                 "*{}*:\n{}".format(mod.__mod_name__, mod.__user_settings__(user_id)) for mod in USER_SETTINGS.values())
-            dispatcher.bot.send_message(user_id, "ye apki current setting h:" + "\n\n" + settings,
+            dispatcher.bot.send_message(user_id, "These are your current settings:" + "\n\n" + settings,
                                         parse_mode=ParseMode.MARKDOWN)
 
         else:
-            dispatcher.bot.send_message(user_id, "current settings ko set karne ki jarurat h :'(",
+            dispatcher.bot.send_message(user_id, "Seems like there aren't any user specific settings available :'(",
                                         parse_mode=ParseMode.MARKDOWN)
 
     else:
@@ -366,7 +360,7 @@ def donate(bot: Bot, update: Update):
         update.effective_message.reply_text(DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
         if OWNER_ID != 254318997 and DONATION_LINK:
-            update.effective_message.reply_text("Donation ke liye contact kare "
+            update.effective_message.reply_text("You can also donate here "
                                                 "[here]({})".format(DONATION_LINK),
                                                 parse_mode=ParseMode.MARKDOWN)
 
@@ -374,9 +368,9 @@ def donate(bot: Bot, update: Update):
         try:
             bot.send_message(user.id, DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
-            update.effective_message.reply_text("Creator ko donate karne ke liye apko pm kiya gya!")
+            update.effective_message.reply_text("I've PM'ed you about donating to my creator!")
         except Unauthorized:
-            update.effective_message.reply_text("kripaya pehle pm kare donation se related information ke liye.")
+            update.effective_message.reply_text("Contact me in PM first to get donation information.")
 
 
 def migrate_chats(bot: Bot, update: Update):
