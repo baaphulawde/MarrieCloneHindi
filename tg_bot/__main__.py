@@ -18,19 +18,10 @@ from tg_bot.modules.helper_funcs.chat_status import is_user_admin
 from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
-Hey {}, my name is {}! if you have any questions about how to use me please give me /help... 
-
-Me ek group manager bot hu and yes I talk in hindi  
-Onwer of this bot is [Mohit](tg://user?id={}).
-Join @Scary_stuff 
-
-If you need the source please contact the owner @king_un_007
-
+hoi {}, my name is {}! if you have any questions about how to use me please give me /help... 
+im a group manager bot maintained by  [Asli Baap](tg://user?id={}).
+Follow my creator on instagram : https://www.instagram.com/mohit.719
 For more commands click /help...
-
-**Follow my creator on instagram by the link below 
-https://www.instagram.com/mohit.719
-
 """
 
 HELP_STRINGS = """
