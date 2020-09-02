@@ -33,7 +33,7 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_member = chat.get_member(user_id)
     if user_member.status == 'administrator' or user_member.status == 'creator':
-        message.reply_text("Jo user pehle se hi admin h unko admin banane ke liye jadugar ka jadu lagega (Jadugar= @king_un_007 )")
+        message.reply_text("Jo user pehle se hi admin h unko admin banane ke liye jadugar ka jadu lagega ")
         return ""
 
     if user_id == bot.id:
